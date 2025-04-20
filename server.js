@@ -1,13 +1,19 @@
 const express = require("express");
 const axios = require("axios");
+const cors = require("cors"); // 추가
 const app = express();
+
+// 🔵 CORS 허용 미들웨어 추가
+app.use(cors());
 
 app.get("/proxy", async (req, res) => {
   try {
     const apiUrl =
-      "http://openapi.seoul.go.kr:8088/6e786a614970696733336d62577357/json/TbSeoulmetroStOrigin/1/599/"; // (여기에 진짜 키 전체 넣기)
-    const response = await axios.get(apiUrl);
-    res.json(response.data); // 받아온 데이터를 그대로 응답
+      "http://openapi.seoul.go.kr:8088/6e786a614970696733336d62577357/json/TbSeoulmetroStOrigin/1/599/";
+    const response = await axios.get(apiUrl, {
+      validateStatus: () => true,
+    });
+    res.json(response.data);
   } catch (error) {
     console.error(error);
     res.status(500).send("API 요청 실패");
