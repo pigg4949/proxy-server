@@ -9,7 +9,7 @@ app.use(cors());
 app.get("/proxy", async (req, res) => {
   try {
     const apiUrl =
-      "https://openapi.seoul.go.kr:8088/6e786a614970696733336d62577357/json/TbSeoulmetroStOrigin/1/599/";
+      "http://openapi.seoul.go.kr:8088/6e786a614970696733336d62577357/json/TbSeoulmetroStOrigin/1/599/";
     const response = await axios.get(apiUrl, {
       validateStatus: () => true,
     });
